@@ -24,6 +24,6 @@ urlpatterns = [
     #url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/login/$', login_page),
     url(r'^register/$', register),
-    url(r'^register/success/$', register_success),
+    url(r'^register/success/$', register_success),    
     url(r'^home/$', home),
 ]

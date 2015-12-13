@@ -13,6 +13,7 @@ from django.template import RequestContext
 def login_page(request):
     return login(request, template_name='userlog/login.html')   
 
+@csrf_protect
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -39,6 +40,7 @@ def register_success(request):
     'userlog/success.html',
     )
  
+@login_required
 def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/')

@@ -3,22 +3,32 @@
 {% block title %}Transcript{% endblock %}
 
 {% block content %}
-	<div id='interface'>
-		<h1>Enter Transcript - Type in or Submit File</h1>
-		<p>Click "Choose File" to upload a txt file:</p><br>
-		<form method="post" action="/speech/" id="transcript" enctype="multipart/form-data"> {% csrf_token %}
-		{{ uform }}
-		<br><br>
-		<input type="submit" value="Submit File to Speech Page" />
+	<div class="content_align_vertical">
+	<div class="content_align_horizontal">
+	<div class="content_background" align="center">
+		<h2>Enter Transcript - Type in or Submit File</h2>
+		<!--p>Click "Choose File" to upload a txt file:</p-->
+		<form method="post" action="{% url "speech" %}" id="transcript" enctype="multipart/form-data"> {% csrf_token %}
+		<!--center>{{ uform }}</center-->
+		<p>{{ uform.non_field_errors }}</p>
+        <p>{{ uform.file.label_tag }} </p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{ uform.file.errors }}
+            {{ uform.file }}
+        </p>
+		<input type="submit" value="Submit File to Speech Page" class="button"/>
 		</form>
 		<br>
 		<p>OR</p>
 		<p>Type or paste a transcript of what you will record</p>
 		<form method="post" action="/speech/" id="transcript"> {% csrf_token %}
 		{{ tform }}
-		<br>
-		<input type="submit" value="Move to Speech Page" />
+		<br><br>
+		<input type="submit" value="Move to Speech Page" class="button"/>
 		</form>
+		<br>
 		<a href="/logout/">Logout</a>
+	</div>
+	</div>
 	</div>
 {% endblock %}

@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from .forms import TranscriptForm, UploadForm
 from .misc import read_file
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required
 def speech(request):
     if request.method == 'POST':
         uform = UploadForm(request.POST, request.FILES)
@@ -28,7 +31,7 @@ def speech(request):
         context = {'uform': uform}
     return render(request, 'speech/speech.html', context)
         
-
+@login_required
 def transcript(request):
     tform = TranscriptForm()
     uform = UploadForm()
