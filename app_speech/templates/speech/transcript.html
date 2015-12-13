@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Transcript{% endblock %}
+
+{% block content %}
+	<div id='interface'>
+		<h1>Enter Transcript - Type in or Submit File</h1>
+		<p>Click "Choose File" to upload a txt file:</p><br>
+		<form method="post" action="/speech/" id="transcript" enctype="multipart/form-data"> {% csrf_token %}
+		{{ uform }}
+		<br><br>
+		<input type="submit" value="Submit File to Speech Page" />
+		</form>
+		<br>
+		<p>OR</p>
+		<p>Type or paste a transcript of what you will record</p>
+		<form method="post" action="/speech/" id="transcript"> {% csrf_token %}
+		{{ tform }}
+		<br>
+		<input type="submit" value="Move to Speech Page" />
+		</form>
+		<a href="/logout/">Logout</a>
+	</div>
+{% endblock %}

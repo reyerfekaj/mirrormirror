@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'userlog/userlog.css' %}">
+{% endblock %}
+
+{% block content %}
+	<div class='content_align_vertical'>
+	<div class='content_align_horizontal'>
+	<div class='content_background'>
+		{% block userlog_content %}
+		{% endblock %}
+	</div>
+	</div>
+	</div>
+{% endblock %}

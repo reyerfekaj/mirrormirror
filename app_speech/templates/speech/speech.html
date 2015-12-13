@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Speech{% endblock %}
+
+{% load staticfiles %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'speech/speech.css' %}">
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'speech/speech.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<div id='interface'>
+		<h1> Speech App for {{ user.username }} </h1>
+		{% if fileError %}
+		<p class="error">{{ fileError }} </p>
+		<br>
+		<a href="/transcript/"> Re-enter your transcript</a>
+		<br><br>
+		{% else %}
+		{% if textError %}
+		<p class="error">{{ textError }} </p>
+		<br>
+		<a href="/transcript/"> Enter transcript or text file</a>
+		<br><br>
+		{% else %}
+		<p> Transcript entered from previous page: </p>
+		<h4> If you do not see your transcript text, please go back and re-enter the information </h4>
+		<textarea cols='100' rows='10' id="transcript"> {{ uform }} </textarea>
+		<p>Now, record with the button below. When ready, click again to stop recording and evaluate.</p>
+		<textarea id="results" cols="100" rows="10"></textarea>
+		<br><br>
+		<button id="button" onclick="toggleStartStop()"></button>
+		<br>
+		<span id="final_span"></span>
+		<br><br>
+		<span id="interim_span"></span>
+		<br>
+		<a href="/transcript/">Enter new Transcript</a>
+		{% endif %}
+		{% endif %}
+		<br><br>
+		<a href="/logout/">Logout</a>
+	</div>
+{% endblock %}
