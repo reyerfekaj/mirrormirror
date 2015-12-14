@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Transcript{% endblock %}
+
+{% block content %}
+  <div class="content_align_vertical">
+  <div class="content_align_horizontal">
+  <div class="content_background" align="center">
+  <div id='text-input'>
+  <h1>Results</h1>
+  <table>
+    <tr>
+      <th>Correct Words</th>
+      <td>{{num.correct}}</td>
+    </tr>
+    <tr>
+      <th>Substitutions</th>
+      <td>{{num.substitutions}}</td>
+    </tr>
+    <tr>
+      <th>Insertions</th>
+      <td>{{num.insertions}}</td>
+    </tr>
+    <tr>
+      <th>Deletions</th>
+      <td>{{num.deletions}}</td>
+    </tr>
+  </table>
+  <p>The recognizer correctly heard {{accuracy}}% of the words in your transcript. See the comparison below:</p>
+  <table id="resultTable" style="margin-bottom:20px">
+    </tr>
+  </table>
+  <script type = "text/javascript">
+    var table = document .getElementById ("resultTable") ;
+    var ref = "{{ref}}" .split (/\s+/) ;
+    var hyp = "{{hyp}}" .split (/\s+/) ;
+    var refRow = document .getElementById ("refRow") ;
+    var hypRow = document .getElementById ("hypRow") ;
+    for (i = 0 ; i < ref .length ; i ++) {
+      if (i % 10 == 0) {
+        var refRow = document .createElement ("tr") ;
+        var hypRow = document .createElement ("tr") ;
+        table .appendChild (refRow) ;
+        table .appendChild (hypRow) ;
+        refHeader = document .createElement ("th") ;
+        refHeader .innerHTML = "Reference" ;
+        hypHeader = document .createElement ("th") ;
+        hypHeader .innerHTML = "Recognized" ;
+        hypHeader .className = "hyp" ;
+        refRow .appendChild (refHeader) ;
+        hypRow .appendChild (hypHeader) ;
+      }
+      var refTD = document .createElement ("td") ;
+      var hypTD = document .createElement ("td") ;
+      hypTD .className = "hyp" ;
+      refTD .innerHTML = ref [i] ;
+      hypTD .innerHTML = hyp [i] ;
+      refRow .appendChild (refTD) ;
+      hypRow .appendChild (hypTD) ;
+    }
+  </script>
+  <a href="/logout/"><strong>Logout</strong></a>
+  </div>
+  </div>
+  </div>
+{% endblock %}

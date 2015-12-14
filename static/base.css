@@ -1,5 +1,5 @@
 body {
-    background: white url("images/background_site_with_title.jpg") no-repeat center center fixed;
+    background: url("images/background_site_with_title.jpg") no-repeat center center fixed;
 	background-size: cover;
 	font-family: Helvetica, Verdana, sans-serif;
 }
@@ -41,4 +41,8 @@ table.center {
 	border-radius: 5px;
 	border: 0px;
 	cursor: pointer;
+}
+
+td.hyp, th.hyp {
+  padding-bottom: 15px ;
 }

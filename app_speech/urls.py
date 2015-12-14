@@ -19,4 +19,5 @@ from .views import *
 urlpatterns = [
     url(r'^speech/$', speech, name='speech'),
     url(r'^transcript/$', transcript, name='transcript'),
+    url(r'^results/$', results, name='results')
 ]

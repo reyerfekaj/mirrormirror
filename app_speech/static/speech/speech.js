@@ -1,4 +1,3 @@
-<<<<<<< HEAD:userlog/static/main.js
 if (!('webkitSpeechRecognition' in window)) {
 	alert("Sorry, your Browser does not support the Speech API");
 } else {
@@ -11,7 +10,7 @@ if (!('webkitSpeechRecognition' in window)) {
 	recognition.onend = reset;
 
 	recognition.onresult = function (e) {
-		var textarea = document.getElementById('results');
+		var textarea = document.getElementById('id_transcript');
 		for (var i = e.resultIndex; i < e.results.length; ++i) {
 			if (e.results[i].isFinal) {
 				textarea.value += e.results[i][0].transcript + ' /';			
@@ -31,20 +30,20 @@ if (!('webkitSpeechRecognition' in window)) {
 	}
 	
 	function reset() {
-		recognizing = false ;
-		button.innerHTML = "Click to Speak" ;
+		recognizing = false;
+		button.innerHTML = "Click to Speak";
 	}
 
 	function toggleStartStop() {
 		if (recognizing) {
-			recognition.stop() ;
-			reset() ;
+			recognition.stop();
+			reset();
 		} else {
 			recognition.start();
 			recognizing = true;
-			button.innerHTML = "Click to Stop" ;
-			final_span.innerHTML = "" ;
-			interim_span.innerHTML = "" ;
+			button.innerHTML = "Click to Stop";
+			final_span.innerHTML = "";
+			interim_span.innerHTML = "";
 		}
 	}
 }
