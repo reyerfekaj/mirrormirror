@@ -1,0 +1,40 @@
+{% extends "userlog/userlog_base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block userlog_content %}
+	{% if form.errors %}
+		<em class='error' align="center">Your username and password didn't match. Please try again.</em>
+		<br><br>
+	{% endif %}
+	<form method="post" action=".">{% csrf_token %}
+		<table class="center" border="0">
+			<tr>
+			    <th><label for="id_username">Username:</label></th>
+				<td>{{ form.username }}</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>
+			<tr><td colspan="2"></td></tr>
+			<tr>
+			    <th><label for="id_password">Password:</label></th>
+				<td>{{ form.password }}</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>
+			<tr><td colspan="2"></td></tr>
+			<tr>
+			    <td colspan="2" align="center">
+				    <input type="submit" value="Login" class="button"/>
+					<input type="hidden" name="next" value="/home" />
+				</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>
+			<tr><td colspan="2"></td></tr>
+			<tr>
+			    <th colspan="2" align="center">
+				    <a href="/register">Register</a>
+				</th>
+			</tr>			
+		</table>		
+	</form>
+	
+{% endblock %}

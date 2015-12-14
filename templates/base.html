@@ -1,0 +1,36 @@
+<<<<<<< HEAD:userlog/templates/base.html
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+        <title>Speech App | {% block title %}{% endblock %}</title>
+		<meta name="description" content="">
+		<link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body>
+        {% block content %}
+		{% endblock %}
+        <script src="{% static 'main.js'%}"></script>
+    </body>
+=======
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+        <title>Speech App | {% block title %}{% endblock %}</title>
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+		{% block styles %}		    
+		{% endblock %}	
+    </head>
+    <body>
+        {% block content %}
+		{% endblock %}		
+		{% block scripts %}		    
+		{% endblock %}
+    </body>
+>>>>>>> 10197428a5e8c549b6ef8dcb389e1db69276c82f:templates/base.html
+</html>

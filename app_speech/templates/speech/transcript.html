@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Transcript{% endblock %}
+
+{% block content %}
+	<div class="content_align_vertical">
+	<div class="content_align_horizontal">
+	<div class="content_background" align="center">
+		<h2>Enter Transcript - Type in or Submit File</h2>
+		<!--p>Click "Choose File" to upload a txt file:</p-->
+		<form method="post" action="{% url "speech" %}" id="transcript" enctype="multipart/form-data"> {% csrf_token %}
+		<p style="line-height: 25px">
+		    <!--{{ uform }}-->
+		    {{ uform.non_field_errors }}<br>
+            {{ uform.file.label_tag }}<br>		
+            {{ uform.file.errors }}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{ uform.file }}<br>
+		    <input type="submit" value="Submit File to Speech Page" class="button"/>
+		</p>
+		</form>
+		<p style="font-weight: bold">OR</p>
+		Type or paste a transcript of what you will record
+		<form method="post" action="{% url "speech" %}" id="transcript"> {% csrf_token %}
+		{{ tform }}<br>
+		<input type="submit" value="Move to Speech Page" class="button"/>
+		</form>
+		<br>
+		<a href="/logout/"><strong>Logout</strong></a>
+	</div>
+	</div>
+	</div>
+{% endblock %}

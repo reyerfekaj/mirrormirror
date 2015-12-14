@@ -1,0 +1,11 @@
+{% extends "userlog/userlog_base.html" %}
+
+{% block title %}Home {% endblock %}
+
+{% block userlog_content %}
+	<table class="center" border="0">
+		<tr><td align="center"><em><h1>Welcome {{ user.username }} </h1></em></td></tr>
+		<tr><th align="center"><a href="/transcript/">Speech App</a></th></tr>
+		<tr><th align="center"><a href="/logout/">Logout</a></th></tr>	
+	</table>
+{% endblock %}

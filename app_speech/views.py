@@ -1,0 +1,39 @@
+from django.shortcuts import render
+from .forms import TranscriptForm, UploadForm
+from .misc import read_file
+from django.contrib.auth.decorators import login_required
+
+# Create your views here.
+
+@login_required
+def speech(request):
+    if request.method == 'POST':
+        uform = UploadForm(request.POST, request.FILES)
+        context = {}
+        if uform.is_valid():
+            #context['uform'] = read_file(request.FILES['file'])
+            text = read_file(request.FILES['file'])
+            if text == "NOT TXT":
+                context['fileError'] = "Uploaded %s file is not of a supported\
+ format, please use a txt file" % request.FILES['file'].name
+            else:
+                context['uform'] = text
+        else:
+            uform = TranscriptForm(request.POST)
+            if uform.is_valid():
+                transcript = uform.cleaned_data['transcript']
+                context['uform'] = transcript
+            else:
+                context['textError'] = "Please type in or upload file with\
+ your speech transcript"
+    else:
+        uform = TranscriptForm()
+        context = {'uform': uform}
+    return render(request, 'speech/speech.html', context)
+        
+@login_required
+def transcript(request):
+    tform = TranscriptForm()
+    uform = UploadForm()
+    context_data = {'tform': tform, 'uform': uform}
+    return render(request, 'speech/transcript.html', context_data)

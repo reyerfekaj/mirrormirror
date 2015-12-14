@@ -1,0 +1,25 @@
+{% extends "userlog/userlog_base.html" %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block userlog_content %}
+	<form method="post" action=".">{% csrf_token %}
+		<table class = 'center' border="0">
+			{{ form.as_table }}
+			<tr><td colspan="2"></td></tr>
+			<tr><td colspan="2"></td></tr>
+			<tr>
+			    <td colspan="2" align="center">
+				    <input type="submit" value="Register" class="button"/>
+				</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>
+			<tr><td colspan="2"></td></tr>
+			<tr>
+			    <th colspan="2" align="center">
+				    <a href="/">Login</a>
+				</th>
+			</tr>
+		</table>		
+	</form>	
+{% endblock %}

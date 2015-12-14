@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Speech{% endblock %}
+
+{% load staticfiles %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'speech/speech.css' %}">
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'speech/speech.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="content_align_vertical">
+	<div class="content_align_horizontal">
+	<div align="center"
+		<!--h1 Speech App for {{ user.username }} /h1-->	
+		{% if fileError %}
+		<div class="content_background">
+		<p class="error">{{ fileError }} </p>
+		<!--a href="{% url "transcript" %}"><strong>Re-enter your transcript<strong></a-->
+		</div>
+		{% else %}
+		{% if textError %}
+		<div class="content_background">
+		<p class="error">{{ textError }} </p>
+		<!--a href="{% url "transcript" %}"><strong>Enter transcript or text file</strong></a-->
+		</div>
+		{% else %}
+		<!--p> Transcript entered from previous page: </p-->
+		<div class="content_background">
+		<h2>Transcript</h2>
+		If you do not see your transcript, please try to enter it again<br>
+		<textarea cols='70' rows='10' id="transcript"> {{ uform }} </textarea>
+		</div>
+		<br>
+		<div class="content_background">
+		<h2>Speech</h2>
+		Now, record with the button below. When ready, click it again to finish.<br>
+		<textarea id="results" cols="70" rows="10"></textarea>
+		<br>
+		<button id="button" class ="button" onclick="toggleStartStop()"></button>
+		<span id="final_span" style="display: none"></span>
+		<br>
+		<span id="interim_span"></span>
+		</div>
+		<br>
+        <div class="content_background">
+		<h2>Feedback</h2>		
+		<textarea id="feedback" cols="70" rows="10"></textarea>
+		</div>		
+		{% endif %}
+		{% endif %}
+		<br>
+		<div class="content_background">
+		<a href="{% url "transcript" %}"><strong>Enter new Transcript</strong></a>
+		<br>
+		<a href="/logout/"><strong>Logout</strong></a>
+		</div>
+	</div>
+	</div>
+	</div>
+{% endblock %}

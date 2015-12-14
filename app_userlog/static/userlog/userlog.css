@@ -1,0 +1,5 @@
+input[type="submit"]{
+	width: 100px;		
+	height: 25px;
+	font-weight: bold;
+}
