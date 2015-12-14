@@ -9,25 +9,24 @@
 		<h2>Enter Transcript - Type in or Submit File</h2>
 		<!--p>Click "Choose File" to upload a txt file:</p-->
 		<form method="post" action="{% url "speech" %}" id="transcript" enctype="multipart/form-data"> {% csrf_token %}
-		<!--center>{{ uform }}</center-->
-		<p>{{ uform.non_field_errors }}</p>
-        <p>{{ uform.file.label_tag }} </p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<p style="line-height: 25px">
+		    <!--{{ uform }}-->
+		    {{ uform.non_field_errors }}<br>
+            {{ uform.file.label_tag }}<br>		
             {{ uform.file.errors }}
-            {{ uform.file }}
-        </p>
-		<input type="submit" value="Submit File to Speech Page" class="button"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{ uform.file }}<br>
+		    <input type="submit" value="Submit File to Speech Page" class="button"/>
+		</p>
 		</form>
-		<br>
-		<p>OR</p>
-		<p>Type or paste a transcript of what you will record</p>
-		<form method="post" action="/speech/" id="transcript"> {% csrf_token %}
-		{{ tform }}
-		<br><br>
+		<p style="font-weight: bold">OR</p>
+		Type or paste a transcript of what you will record
+		<form method="post" action="{% url "speech" %}" id="transcript"> {% csrf_token %}
+		{{ tform }}<br>
 		<input type="submit" value="Move to Speech Page" class="button"/>
 		</form>
 		<br>
-		<a href="/logout/">Logout</a>
+		<a href="/logout/"><strong>Logout</strong></a>
 	</div>
 	</div>
 	</div>

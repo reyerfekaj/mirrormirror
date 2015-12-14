@@ -7,7 +7,7 @@ body {
 .content_align_vertical{
 	display: table-cell;
 	width: 100vw;
-	height: 100vh;
+	height: 96vh;
 	vertical-align: middle;
 }
 
@@ -20,7 +20,7 @@ body {
 	padding: 20px;
 	border-radius: 10px;
 	background-color: #fefb64;
-	opacity: 0.8;
+	opacity: 0.9;
 	color: #631878;
 }
 
@@ -31,6 +31,7 @@ table.center {
 
 .error{
     color: red;
+	font-style: italic;
 }
 
 .button{
@@ -39,6 +40,5 @@ table.center {
 	font-size: 12pt;
 	border-radius: 5px;
 	border: 0px;
-	cursor: pointer;	
-	height: 25px;
+	cursor: pointer;
 }
