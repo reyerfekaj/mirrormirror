@@ -30,20 +30,20 @@ if (!('webkitSpeechRecognition' in window)) {
 	}
 	
 	function reset() {
-		recognizing = false;
-		button.innerHTML = "Click to Speak";
+		recognizing = false ;
+		button.innerHTML = "Click to Speak" ;
 	}
 
 	function toggleStartStop() {
 		if (recognizing) {
-			recognition.stop();
-			reset();
+			recognition.stop() ;
+			reset() ;
 		} else {
 			recognition.start();
 			recognizing = true;
-			button.innerHTML = "Click to Stop";
-			final_span.innerHTML = "";
-			interim_span.innerHTML = "";
+			button.innerHTML = "Click to Stop" ;
+			final_span.innerHTML = "" ;
+			interim_span.innerHTML = "" ;
 		}
 	}
 }

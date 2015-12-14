@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Speech_01{% endblock %}
+{% block content %}
+
+  <div id='text-input'>
+  <h1>Results</h1>
+  <table>
+    <tr>
+      <th>Correct Words</th>
+      <td>{{results.num.correct}}</td>
+    </tr>
+    <tr>
+      <th>Substitutions</th>
+      <td>{{results.num.substitutions}}</td>
+    </tr>
+    <tr>
+      <th>Insertions</th>
+      <td>{{results.num.insertions}}</td>
+    </tr>
+    <tr>
+      <th>Deletions</th>
+      <td>{{results.num.deletions}}</td>
+    </tr>
+  </table>
+  <p>The recognizer correctly heard {{results.accuracy}}% of the words in your transcript. See the comparison below:</p>
+  <table id="resultTable">
+    <tr id="refRow">
+      <th>Reference</th>
+    </tr>
+    <tr id="hypRow">
+      <th>Recognized</th>
+    </tr>
+  </table>
+  <script type = "text/javascript">
+    var ref = "{{results.ref}}" .split (/\s+/) ;
+    var hyp = "{{results.hyp}}" .split (/\s+/) ;
+    var refRow = document .getElementById ("refRow") ;
+    var hypRow = document .getElementById ("hypRow") ;
+    for (token in ref) {
+      var refTD = document .createElement ("td") ;
+      var hypTD = document .createElement ("td") ;
+      refTD .innerHTML = ref [token] ;
+      hypTD .innerHTML = hyp [token] ;
+      refRow .appendChild (refTD) ;
+      hypRow .appendChild (hypTD) ;
+    }
+  </script>
+  <p>Below, please type or paste a transcript of what you will record:</p>
+  <textarea cols="100" rows="10" autofocus id="input"></textarea>
+  </div>
+  <div id='interface'>
+    <p>Now, record with the button below. When ready, click again to stop recording and evaluate.</p>
+    <textarea id="results" cols="100" rows="10"></textarea>
+    <br><br>
+    <button id="button" onclick="toggleStartStop()"></button><br>
+    <span id="final_span"></span>
+    <br><br>
+    <span id="interim_span"></span>
+    <br>
+    <a href="/logout/">Logout</a>
+  </div>
+
+  {% endblock %}

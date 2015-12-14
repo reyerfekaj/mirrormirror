@@ -1,0 +1,17 @@
+
+
+		DUMP OF SYSTEM ALIGNMENT STRUCTURE
+
+System name:   test.hyp
+
+Speakers: 
+    0:  
+
+Speaker sentences   0:     #utts: 1
+id: (mirror)
+Scores: (#C #S #D #I) 34 16 2 1
+REF:  WE THE  people OF the united STATES, in order to form a more perfect UNION, establish JUSTICE, insure domestic TRANQUILLITY, provide for the common DEFENSE, promote the general WELFARE, and secure the blessings of liberty to ourselves and our POSTERITY, do ordain and * ESTABLISH THIS CONSTITUTION OF the UNITED STATES OF      AMERICA. 
+HYP:  ** WHEN people IN the united STATES  in order to form a more perfect UNION  establish JUSTICE  insure domestic TRANQUILITY   provide for the common DEFENSE  promote the general WELFARE  and secure the blessings of liberty to ourselves and our POSTERITY  do ordain and I WAS       THE  FASTEST      IN the ****** NFL    AMERICA /        
+Eval: D  S           S             S                                       S                S                        S                                    S                            S                                                                 S                        I S         S    S            S      D      S      S       S        
+
+

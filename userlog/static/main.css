@@ -24,3 +24,8 @@ table.center {
 #interim_span{
 	color: grey;
 }
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}

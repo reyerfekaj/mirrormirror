@@ -1,0 +1,24 @@
+NIST_TEXT_ALIGNMENT
+VERSION 0.1
+
+
+		DUMP OF SYSTEM ALIGNMENT STRUCTURE
+
+System name:   ./mand_hyp.ctm
+Ref file:      ./mand_ref.stm
+Hyp file:      ./mand_hyp.ctm
+
+Speaker Count: 2
+Speakers: 
+    0:  ma_0029_a
+    1:  ma_0029_b
+
+
+Speaker sentences   0:  ma_0029_a   utt# 0 of 4
+id: (ma_0029_a-000)
+File: ma_0029
+Channel: 1
+Scores: (#C #S #D #I) 2 1 0 1
+Attributes: Character_align 
+Ref times: t1= 119.99 t2= 121.08
+REF:  **      Ŷ      o       k       
