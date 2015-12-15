@@ -8,7 +8,7 @@
   <div class="content_background" align="center">
   <div id='text-input'>
   <h1>Results</h1>
-  <table>
+  <table id="resultNums">
     <tr>
       <th>Correct Words</th>
       <td>{{num.correct}}</td>
@@ -60,12 +60,45 @@
     }
   </script>
   <button onclick="goBack()">Try Again</button>
-  <script>
+  <script type="text/javascript">
 	function goBack() {
 		window.history.back();
 	}
   </script>
-  <br><br><a href="/info/"><strong>FAQ</strong></a><br>
+  <br><br>
+  <button onclick="sendMail(); return false">Send results through email</button><br><br>
+  <script type="text/javascript">
+	function sendMail() {
+		var body = escape("Accuracy: {{accuracy}}% \n ") + escape(GetCellValues(document.getElementById('resultNums'), 0)) + escape(GetCellValues(document.getElementById('resultTable'), 1)) ;
+		var link = "mailto:{{user.email}}"
+				+ "&subject=" + escape("Mirrormirror Results")
+				+ "&body="+body;
+		window.location.href = link;
+	}
+	function GetCellValues(resulting , num) {
+        var table = resulting;
+		var out = "\n" ;
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+			var line = "" ;
+            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+				if (c == 0) {
+					line += (table.rows[r].cells[c].innerHTML)+ ":\t" ;
+				} else {
+					line += (table.rows[r].cells[c].innerHTML) + "\t";
+				}
+            }
+			if (num == 1 && r % 2 == 1){
+				out += line + "\n\n" ;
+			} else if (num == 0 && r == n-2){
+				out += line ;
+			} else {
+				out += line + "\n";
+			}
+        }
+		return out;
+    }
+  </script>
+  <a href="/info/"><strong>FAQ</strong></a><br>
   <a href="/logout/"><strong>Logout</strong></a>
   </div>
   </div>
