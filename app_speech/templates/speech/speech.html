@@ -42,7 +42,7 @@
 	<div class="content_background">
 		<h2>Speech</h2>
 		Now, record with the button below. When ready, click it again to finish.
-		<br>
+		<br><br>
 		<form method="post" action="{% url "results" %}" id="speech" enctype="multipart/form-data">
 			{% csrf_token %}
 			<p style="line-height: 25px">
@@ -59,7 +59,8 @@
 	-->
 	<!-- <br>
 	-->
-	<button id="button" class ="button" onclick="toggleStartStop()"></button>
+	<button id="button" class ="button" onclick="toggleStartStop()"></button><br><br>
+	<button id="b2" class="button" onclick="history.go(0)">Restart Speech</button>
 	<span id="final_span" style="display: none"></span>
 	<br>
 	<span id="interim_span"></span>
