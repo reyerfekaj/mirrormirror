@@ -5,7 +5,7 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout
 from django.views.decorators.csrf import csrf_protect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
  
@@ -51,3 +51,6 @@ def home(request):
     'userlog/home.html',
     { 'user': request.user }
     )
+
+def info(request):
+    return render(request, "info.html", {})

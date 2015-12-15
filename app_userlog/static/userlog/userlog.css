@@ -3,3 +3,7 @@ input[type="submit"]{
 	height: 25px;
 	font-weight: bold;
 }
+
+#info{
+	text-align: center;
+}
