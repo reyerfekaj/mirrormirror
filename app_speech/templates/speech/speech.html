@@ -4,7 +4,7 @@
 
 {% load staticfiles %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'speech/speech.css' %}">
+	<link rel="stylesheet" href="{% static 'speech/speech.css' %}">
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'speech/jquery-2.1.4.min.js' %}"></script>
@@ -21,14 +21,16 @@
 	{% if fileError %}
 		<div class="content_background">
 			<p class="error">{{ fileError }}</p>
+			<a href="{% url 'transcript' %}"><strong>Enter new Transcript</strong></a>
 		</div>
 	{% elif textError %}
 		<div class="content_background">
 			<p class="error">{{ textError }}</p>
+			<a href="{% url 'transcript' %}"><strong>Enter new Transcript</strong></a>
 		</div>
 	{% else %}
 		<div class="content_background">
-			<h2 style="line-height:80%;">Transcript</h2>
+			<h2 style="line-height:50%;">Transcript</h2>
 			If you do not see your transcript, please try to enter it again
 			<br>
 			<textarea id="transcript" cols='70' rows='10' class="textarea" readonly="readlonly">{{ uform }}</textarea>
@@ -37,20 +39,20 @@
 		</div>
 		<br>
 		<div class="content_background">
-			<h2 style="line-height:80%;">Speech</h2>
+			<h2 style="line-height:50%;">Speech</h2>
 			Now, record with the button below. When ready, click it again to finish.<br>
-			<textarea id="speech" cols="70" rows="10" class="textarea"></textarea>
-			<br>
+			<div id="results" class="textarea">
+				<span class="final" id="final_span"></span> <span class="interim" id=
+			  "interim_span"></span>
+			</div>
+			<textarea id="speech" cols="70" rows="10" class="textarea" style="display: none"></textarea>
 			<button id="sb2" class="button" onclick="history.go(0)">Restart Speech</button>
 			<button id="sb1" onclick="toggleStartStop()"><img alt="Start" id="start_img" src="{% static 'speech/images/mic.gif' %}" width="40" height="40">
 			</button>
 			<form action="{% url 'results' %}" id='sb3'>
 				<input type="submit" onclick="postText()" value="Evaluate Speech" class="button"/>
 			</form>
-			<span id="final_span" style="display: none"></span>
-			<br>
-			<span id="interim_span"></span>
-		</div>
+		</div>		
 	{% endif %}
 	<br>
 	<div class="content_background">		
