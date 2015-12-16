@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app_userlog',
     'app_speech',
+    'app_userpro',
 )
 
 MIDDLEWARE_CLASSES = (

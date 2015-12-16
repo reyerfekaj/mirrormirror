@@ -4,9 +4,9 @@
 
 {% block userlog_content %}
 	<table class="center" border="0">
-		<tr><td align="center"><em><h1>Welcome {{ user.username }} </h1></em></td></tr>
-		<tr><th align="center"><a href="/transcript/">Speech App</a></th></tr>
-		<tr><th align="center"><a href="/info/">FAQ</a></th></tr>
-		<tr><th align="center"><a href="/logout/">Logout</a></th></tr>	
+		<tr><td align="center"><h1>Welcome <em style="color: green;">{{ user }}</em></h1></td></tr>
+		<tr><th align="center"><a href="{% url 'transcript' %}">Speech App</a></th></tr>
+		<tr><td><br></td></tr>
+		<tr><th align="center"><a href="{% url 'info' %}">FAQ</a> | <a href="{% url 'logout_page' %}">Logout</a></th></tr>	
 	</table>
 {% endblock %}

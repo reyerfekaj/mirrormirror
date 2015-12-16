@@ -7,78 +7,57 @@
 <link rel="stylesheet" href="{% static 'speech/speech.css' %}">
 {% endblock %}
 {% block scripts %}
-<script src="{% static 'speech/speech.js' %}"></script>
+	<script src="{% static 'speech/jquery-2.1.4.min.js' %}"></script>
+	<script src="{% static 'speech/speech.js' %}"></script>	
+	<script>
+		var URL = "{% url 'get_speech' %}";		
+	</script>
 {% endblock %}
 
 {% block content %}
 <div class="content_align_vertical">
-	<div class="content_align_horizontal">
-		<div align="center">
-		<!--h1 Speech App for {{ user.username }} /h1-->
-			{% if fileError %}
-			<div class="content_background">
-				<p class="error">{{ fileError }}</p>
-				<!--a href="{% url "transcript" %}"> <strong>Re-enter your transcript <strong></a-->
-				</div>
-				{% else %}
-			{% if textError %}
-				<div class="content_background">
-					<p class="error">{{ textError }}</p>
-					<!--a href="{% url "transcript" %}">
-					<strong>Enter transcript or text file</strong>
-				</a-->
-				</div>
-			{% else %}
-			<!--p>Transcript entered from previous page:</p-->
-			<div class="content_background">
-				<h2>Transcript</h2>
-				If you do not see your transcript, please try to enter it again
-				<br>
-				 <textarea cols='70' rows='10' id="transcript">{{ uform }}</textarea>
-			
-		<!-- {{uform}} -->
+<div class="content_align_horizontal">
+<div align="center">
+	{% if fileError %}
+		<div class="content_background">
+			<p class="error">{{ fileError }}</p>
+		</div>
+	{% elif textError %}
+		<div class="content_background">
+			<p class="error">{{ textError }}</p>
+		</div>
+	{% else %}
+		<div class="content_background">
+			<h2 style="line-height:80%;">Transcript</h2>
+			If you do not see your transcript, please try to enter it again
+			<br>
+			<textarea id="transcript" cols='70' rows='10' class="textarea" readonly="readlonly">{{ uform }}</textarea>
+			<br>
+			<a href="{% url 'transcript' %}"><strong>Enter new Transcript</strong></a>
+		</div>
+		<br>
+		<div class="content_background">
+			<h2 style="line-height:80%;">Speech</h2>
+			Now, record with the button below. When ready, click it again to finish.<br>
+			<textarea id="speech" cols="70" rows="10" class="textarea"></textarea>
+			<br>
+			<button id="sb2" class="button" onclick="history.go(0)">Restart Speech</button>
+			<button id="sb1" onclick="toggleStartStop()"><img alt="Start" id="start_img" src="{% static 'speech/images/mic.gif' %}" width="40" height="40">
+			</button>
+			<form action="{% url 'results' %}" id='sb3'>
+				<input type="submit" value="Evaluate Speech" class="button"/>
+			</form>
+			<span id="final_span" style="display: none"></span>
+			<br>
+			<span id="interim_span"></span>
+		</div>
+	{% endif %}
+	<br>
+	<div class="content_background">		
+		<table class="center" border="0">			
+			<tr><th align="center"><a href="{% url 'home' %}">Home</a> | <a href="{% url 'info' %}">FAQ</a> | <a href="{% url 'logout_page' %}">Logout</a></th></tr>	
+		</table>
 	</div>
-	<br>
-	<div class="content_background">
-		<h2>Speech</h2>
-		Now, record with the button below. When ready, click it again to finish.
-		<br><br>
-		<form method="post" action="{% url "results" %}" id="speech" enctype="multipart/form-data">
-			{% csrf_token %}
-			<p style="line-height: 25px">
-				<!--{{ uform }}-->
-				{{ sform }}
-				<br>
-				<input type="submit" value="Submit File to Speech Page" class="button"/>
-			</p>
-		</form>
-		<script>
-			document .getElementById ("id_reference") .value = document .getElementById ("transcript") .value ;
-		</script>
-		<!-- <textarea id="results" cols="70" rows="10">{{sform}}</textarea>
-	-->
-	<!-- <br>
-	-->
-	<button id="button" class ="button" onclick="toggleStartStop()"></button><br><br>
-	<button id="b2" class="button" onclick="history.go(0)">Restart Speech</button>
-	<span id="final_span" style="display: none"></span>
-	<br>
-	<span id="interim_span"></span>
-</div>
-<br>
-{% endif %}
-		{% endif %}
-<br>
-<div class="content_background">
-	<a href="{% url "transcript" %}">
-		<strong>Enter new Transcript</strong>
-	</a>
-	<br>
-	<a href="/info/"><strong>FAQ</strong></a><br>
-	<a href="/logout/">
-		<strong>Logout</strong>
-	</a>
-</div>
 </div>
 </div>
 </div>

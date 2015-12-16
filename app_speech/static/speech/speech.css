@@ -1,14 +1,14 @@
-#button {
-	font-size: 12pt;
-	width: 150px;
-	height: 30px;
-}
-#interim_span{
-	color: grey;
+#sb1 {
+    border: 0;
+    background-color:transparent;
+    padding: 0;	
+	cursor: pointer;
 }
 
-#b2 {
-	font-size: 10pt;
-	width: 120px;
-	height: 30px;
+#sb3{
+	display: inline;
+}
+
+#interim_span{
+	color: grey;
 }

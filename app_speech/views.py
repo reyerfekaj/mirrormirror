@@ -2,16 +2,18 @@ from django.shortcuts import render
 from .forms import TranscriptForm, UploadForm, SpeechForm
 from .misc import read_file
 from django.contrib.auth.decorators import login_required
-import subprocess, re
+from .nlp import score_sclite
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
 @login_required
 def speech(request):
-    sform = SpeechForm()
+    #sform = SpeechForm()
     if request.method == 'POST':
         uform = UploadForm(request.POST, request.FILES)
-        context = {'sform': sform}
+        #context = {'sform': sform}
+        context = {}
         if uform.is_valid():
             #context['uform'] = read_file(request.FILES['file'])
             text = read_file(request.FILES['file'])
@@ -28,9 +30,13 @@ def speech(request):
             else:
                 context['textError'] = "Please type in or upload file with\
  your speech transcript"
+        p = request.user.profile
+        p.transcript = context['uform']
+        p.save()
     else:
         uform = TranscriptForm()
-        context = {'uform': uform, 'sform': sform}
+        #context = {'uform': uform, 'sform': sform}
+        context = {'uform': uform}
     return render(request, 'speech/speech.html', context)
         
 @login_required
@@ -42,51 +48,26 @@ def transcript(request):
 
 @login_required
 def results(request):
-    def tokenize (string):
-        return ' ' .join (list (x .lower () for x in re .findall (r'[A-Za-z0-9\']+', string)))
-
-    if request.method == 'POST':
-        sform = SpeechForm(request.POST)
-        if sform .is_valid ():
-            hyp = sform.cleaned_data['transcript']
-            ref = sform.cleaned_data['reference']
-        else:
-            hyp = ''
-            ref = ''
-    else:
-        hyp = ''
-        ref = ''
-
-    _ref = tokenize (ref)
-    _hyp = tokenize (hyp)
-
-    with open ("ref.ref", 'w') as f:
-      f .write (_ref + " (a)\n")
-    with open ("hyp.hyp", 'w') as f:
-      f .write (_hyp + " (a)\n")
-
-    subprocess .call (["./sclite", "-i", "spu_id", "-o", "pralign", "-r", "ref.ref", "-h", "hyp.hyp", "-n", "test"])
-
-    results = {}
-
-    with open ("test.pra", 'r') as f:
-        text = f .readlines ()
-    numbers = text [11] [22:] .split (" ")
-    results ['num'] = {'correct': numbers [0],
-        'substitutions': numbers [1],
-        'deletions':     numbers [2],
-        'insertions':    numbers [3]
-        }
-    results ['ref'] = text [12] [6:] .strip ()
-    results ['hyp'] = text [13] [6:] .strip ()
-    print (results)
-    denominator = int (results ['num'] ['correct']) + \
-        int (results ['num'] ['substitutions']) + \
-        int (results ['num'] ['deletions'])
-    results ['accuracy'] = str (100 * float (results ['num'] ['correct'])\
-        / (denominator)) [:4]
-    subprocess .call (["rm", "ref.ref"])
-    subprocess .call (["rm", "hyp.hyp"])
-    subprocess .call (["rm", "test.pra"])
-
+    p = request.user.profile
+    hyp = p.speech
+    ref = p.transcript
+    results = score_sclite(hyp, ref)
+    p.feedback = results['accuracy']
+    p.save()
     return render (request, 'speech/results.html', results)
+
+@csrf_exempt
+def get_speech(request):
+    speech_text = str()
+    if request.method == 'POST':
+        if 'speech_text' in request.POST:
+            speech_text = request.POST['speech_text']            
+            # doSomething with speech_text here...
+            #print(speech_text)
+            #assign speech content to 'speech' field of the user profile
+            p = request.user.profile
+            p.speech = speech_text
+            p.save()
+            return HttpResponse('success') # if everything is OK
+    # nothing went well
+    return HttpResponse('failure')

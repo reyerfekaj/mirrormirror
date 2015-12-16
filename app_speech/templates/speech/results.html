@@ -3,103 +3,107 @@
 {% block title %}Transcript{% endblock %}
 
 {% block content %}
-  <div class="content_align_vertical">
-  <div class="content_align_horizontal">
-  <div class="content_background" align="center">
-  <div id='text-input'>
-  <h1>Results</h1>
-  <table id="resultNums">
-    <tr>
-      <th>Correct Words</th>
-      <td>{{num.correct}}</td>
-    </tr>
-    <tr>
-      <th>Substitutions</th>
-      <td>{{num.substitutions}}</td>
-    </tr>
-    <tr>
-      <th>Insertions</th>
-      <td>{{num.insertions}}</td>
-    </tr>
-    <tr>
-      <th>Deletions</th>
-      <td>{{num.deletions}}</td>
-    </tr>
-  </table>
-  <p>The recognizer correctly heard {{accuracy}}% of the words in your transcript. See the comparison below:</p>
-  <table id="resultTable" style="margin-bottom:20px">
-    </tr>
-  </table>
-  <script type = "text/javascript">
-    var table = document .getElementById ("resultTable") ;
-    var ref = "{{ref}}" .split (/\s+/) ;
-    var hyp = "{{hyp}}" .split (/\s+/) ;
-    var refRow = document .getElementById ("refRow") ;
-    var hypRow = document .getElementById ("hypRow") ;
-    for (i = 0 ; i < ref .length ; i ++) {
-      if (i % 10 == 0) {
-        var refRow = document .createElement ("tr") ;
-        var hypRow = document .createElement ("tr") ;
-        table .appendChild (refRow) ;
-        table .appendChild (hypRow) ;
-        refHeader = document .createElement ("th") ;
-        refHeader .innerHTML = "Reference" ;
-        hypHeader = document .createElement ("th") ;
-        hypHeader .innerHTML = "Recognized" ;
-        hypHeader .className = "hyp" ;
-        refRow .appendChild (refHeader) ;
-        hypRow .appendChild (hypHeader) ;
-      }
-      var refTD = document .createElement ("td") ;
-      var hypTD = document .createElement ("td") ;
-      hypTD .className = "hyp" ;
-      refTD .innerHTML = ref [i] ;
-      hypTD .innerHTML = hyp [i] ;
-      refRow .appendChild (refTD) ;
-      hypRow .appendChild (hypTD) ;
-    }
-  </script>
-  <button onclick="goBack()">Try Again</button>
-  <script type="text/javascript">
-	function goBack() {
-		window.history.back();
-	}
-  </script>
-  <br><br>
-  <button onclick="sendMail(); return false">Send results through email</button><br><br>
-  <script type="text/javascript">
-	function sendMail() {
-		var body = escape("Accuracy: {{accuracy}}% \n ") + escape(GetCellValues(document.getElementById('resultNums'), 0)) + escape(GetCellValues(document.getElementById('resultTable'), 1)) ;
-		var link = "mailto:{{user.email}}"
-				+ "&subject=" + escape("Mirrormirror Results")
-				+ "&body="+body;
-		window.location.href = link;
-	}
-	function GetCellValues(resulting , num) {
-        var table = resulting;
-		var out = "\n" ;
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-			var line = "" ;
-            for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-				if (c == 0) {
-					line += (table.rows[r].cells[c].innerHTML)+ ":\t" ;
-				} else {
-					line += (table.rows[r].cells[c].innerHTML) + "\t";
-				}
-            }
-			if (num == 1 && r % 2 == 1){
-				out += line + "\n\n" ;
-			} else if (num == 0 && r == n-2){
-				out += line ;
-			} else {
-				out += line + "\n";
+<div class="content_align_vertical">
+<div class="content_align_horizontal">
+<div align="center">
+	<div id='text-input' class="content_background">
+		<h1>Results</h1>
+		<table id="resultNums">
+			<tr>
+				<th>Correct Words</th>
+				<td>{{num.correct}}</td>
+			</tr>
+			<tr>
+				<th>Substitutions</th>
+				<td>{{num.substitutions}}</td>
+			</tr>
+			<tr>
+				<th>Insertions</th>
+				<td>{{num.insertions}}</td>
+			</tr>
+			<tr>
+				<th>Deletions</th>
+				<td>{{num.deletions}}</td>
+			</tr>
+		</table>
+		<p>The recognizer correctly heard {{accuracy}}% of the words in your transcript. See the comparison below:</p>
+		<table id="resultTable" style="margin-bottom:20px">
+		</table>
+		<script type = "text/javascript">
+			var table = document .getElementById ("resultTable") ;
+			var ref = "{{ref}}" .split (/\s+/) ;
+			var hyp = "{{hyp}}" .split (/\s+/) ;
+			var refRow = document .getElementById ("refRow") ;
+			var hypRow = document .getElementById ("hypRow") ;
+			for (i = 0 ; i < ref .length ; i ++) {
+			  if (i % 10 == 0) {
+				var refRow = document .createElement ("tr") ;
+				var hypRow = document .createElement ("tr") ;
+				table .appendChild (refRow) ;
+				table .appendChild (hypRow) ;
+				refHeader = document .createElement ("th") ;
+				refHeader .innerHTML = "Reference" ;
+				hypHeader = document .createElement ("th") ;
+				hypHeader .innerHTML = "Recognized" ;
+				hypHeader .className = "hyp" ;
+				refRow .appendChild (refHeader) ;
+				hypRow .appendChild (hypHeader) ;
+			  }
+			  var refTD = document .createElement ("td") ;
+			  var hypTD = document .createElement ("td") ;
+			  hypTD .className = "hyp" ;
+			  refTD .innerHTML = ref [i] ;
+			  hypTD .innerHTML = hyp [i] ;
+			  refRow .appendChild (refTD) ;
+			  hypRow .appendChild (hypTD) ;
 			}
-        }
-		return out;
-    }
-  </script>
-  <a href="/info/"><strong>FAQ</strong></a><br>
-  <a href="/logout/"><strong>Logout</strong></a>
+		</script>
+		<button onclick="goBack()" class="button">Try Again</button>
+		<script type="text/javascript">
+			function goBack() {
+				window.history.back();
+			}
+		</script>
+		<br><br>
+		<button onclick="sendMail(); return false" class="button">Send results through email</button>
+		<script type="text/javascript">
+			function sendMail() {
+				var body = escape("Accuracy: {{accuracy}}% \n ") + escape(GetCellValues(document.getElementById('resultNums'), 0)) + escape(GetCellValues(document.getElementById('resultTable'), 1)) ;
+				var link = "mailto:{{user.email}}"
+						+ "&subject=" + escape("Mirrormirror Results")
+						+ "&body="+body;
+				window.location.href = link;
+			}
+			function GetCellValues(resulting , num) {
+				var table = resulting;
+				var out = "\n" ;
+				for (var r = 0, n = table.rows.length; r < n; r++) {
+					var line = "" ;
+					for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+						if (c == 0) {
+							line += (table.rows[r].cells[c].innerHTML)+ ":\t" ;
+						} else {
+							line += (table.rows[r].cells[c].innerHTML) + "\t";
+						}
+					}
+					if (num == 1 && r % 2 == 1){
+						out += line + "\n\n" ;
+					} else if (num == 0 && r == n-2){
+						out += line ;
+					} else {
+						out += line + "\n";
+					}
+				}
+				return out;
+			}
+		</script>
+	</div>
+	<br>
+	<div class="content_background">		
+		<table class="center" border="0">			
+			<tr><th align="center"><a href="{% url 'home' %}">Home</a> | <a href="{% url 'info' %}">FAQ</a> | <a href="{% url 'logout_page' %}">Logout</a></th></tr>	
+		</table>
+	</div>
   </div>
   </div>
   </div>

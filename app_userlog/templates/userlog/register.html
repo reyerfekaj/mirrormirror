@@ -13,14 +13,10 @@
 				    <input type="submit" value="Register" class="button"/>
 				</td>
 			</tr>
-			<tr><td colspan="2"></td></tr>
-			<tr><td colspan="2"></td></tr>
-			<tr>
-			    <th colspan="2" align="center">
-				    <a href="/">Login</a>
-				</th>
-			</tr>
 		</table>		
 	</form>	
-	<div id="info"><a href="/info/"><strong>FAQ</strong></a></div>
+	<table class="center" border="0">		
+		<tr><th align="center"><a href="{% url 'login_page' %}">Login</a></th></tr>
+		<tr><th align="center"><a href="{% url 'info' %}">FAQ</a></th></tr>	
+	</table>
 {% endblock %}

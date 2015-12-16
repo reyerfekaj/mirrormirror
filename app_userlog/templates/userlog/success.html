@@ -6,7 +6,7 @@
     <table class="center" border="0">
 		<tr><td align="center"><em>Registration completed successfully.</em></td></tr>
 		<tr><td align="center"><em>Thank you for registering.<em></td></tr>
-		<tr><th align="center"><a href="/" font>Login</a></th></tr>	
-		<tr><th align="center"><a href="/info/">FAQ</a></th></tr>
+		<tr><th align="center"><a href="{% url 'login_page' %}" font>Login</a></th></tr>	
+		<tr><th align="center"><a href="{% url 'info' %}">FAQ</a></th></tr>
 	</table>
 {% endblock %}

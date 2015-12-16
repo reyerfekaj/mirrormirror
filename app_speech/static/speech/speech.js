@@ -10,7 +10,7 @@ if (!('webkitSpeechRecognition' in window)) {
 	recognition.onend = reset;
 
 	recognition.onresult = function (e) {
-		var textarea = document.getElementById('id_transcript');
+		var textarea = document.getElementById('speech');
 		for (var i = e.resultIndex; i < e.results.length; ++i) {
 			if (e.results[i].isFinal) {
 				textarea.value += e.results[i][0].transcript + ' /';			
@@ -31,19 +31,31 @@ if (!('webkitSpeechRecognition' in window)) {
 	
 	function reset() {
 		recognizing = false;
-		button.innerHTML = "Click to Speak";
+		//sb1.innerHTML = "Click to Speak";
+		sb1.style.backgroundColor = "transparent";
+		start_img.alt = "Start";
 	}
 
 	function toggleStartStop() {
 		if (recognizing) {
 			recognition.stop();
+			// get speech text
+			var data = {'speech_text': document.getElementById('speech').value};
+			$.post(URL, data, function(response){
+				if(response != 'success'){ alert('Error in getting speech!'); }
+			});			
 			reset();
 		} else {
 			recognition.start();
 			recognizing = true;
-			button.innerHTML = "Click to Stop";
+			//sb1.innerHTML = "Click to Stop";
+			sb1.style.backgroundColor = "green";
+			start_img.alt = "Stop";
 			final_span.innerHTML = "";
 			interim_span.innerHTML = "";
 		}
 	}
+	
+	
 }
+

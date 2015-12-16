@@ -18,13 +18,12 @@ from .views import *
 
 urlpatterns = [
     #url(r'^$', 'django.contrib.auth.views.login'),
-    url(r'^$', login_page, name="login_page"),
-    url(r'^logout/$', logout_page, name="logout_page"),
+    url(r'^$', login_page),
+    url(r'^logout/$', logout_page),
     # If user is not login it will redirect to login page
     #url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    url(r'^accounts/login/$', login_page, name="login_page"),
-    url(r'^register/$', register, name="register"),
-    url(r'^register/success/$', register_success, name="register_success"),    
-    url(r'^home/$', home, name="home"),
-    url(r'^info/$', info, name="info")
+    url(r'^accounts/login/$', login_page),
+    url(r'^register/$', register),
+    url(r'^register/success/$', register_success),    
+    url(r'^home/$', home),
 ]
