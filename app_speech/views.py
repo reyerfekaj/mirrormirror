@@ -65,6 +65,8 @@ def get_speech(request):
             # doSomething with speech_text here...
             #print(speech_text)
             #assign speech content to 'speech' field of the user profile
+            print ("TESTTEST")
+            print (speech_text)
             p = request.user.profile
             p.speech = speech_text
             p.save()

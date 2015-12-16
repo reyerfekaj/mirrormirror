@@ -45,7 +45,7 @@
 			<button id="sb1" onclick="toggleStartStop()"><img alt="Start" id="start_img" src="{% static 'speech/images/mic.gif' %}" width="40" height="40">
 			</button>
 			<form action="{% url 'results' %}" id='sb3'>
-				<input type="submit" value="Evaluate Speech" class="button"/>
+				<input type="submit" onclick="postText()" value="Evaluate Speech" class="button"/>
 			</form>
 			<span id="final_span" style="display: none"></span>
 			<br>

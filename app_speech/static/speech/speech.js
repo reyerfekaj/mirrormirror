@@ -36,16 +36,33 @@ if (!('webkitSpeechRecognition' in window)) {
 		start_img.alt = "Start";
 	}
 
+	function postText() {
+		var data = {'speech_text': document.getElementById('speech').value};
+		console .log (data)
+		$.post(URL, data, function(response){
+			// console .log (data)
+			if(response != 'success'){ alert('Error in getting speech!'); }
+		});			
+	}
+
 	function toggleStartStop() {
 		if (recognizing) {
 			recognition.stop();
-			// get speech text
+			reset();
 			var data = {'speech_text': document.getElementById('speech').value};
+			console .log (data)
 			$.post(URL, data, function(response){
+				// console .log (data)
 				if(response != 'success'){ alert('Error in getting speech!'); }
 			});			
-			reset();
 		} else {
+			// // get speech text
+			// var data = {'speech_text': document.getElementById('speech').value};
+			// console .log (data)
+			// $.post(URL, data, function(response){
+			// 	// console .log (data)
+			// 	if(response != 'success'){ alert('Error in getting speech!'); }
+			// });			
 			recognition.start();
 			recognizing = true;
 			//sb1.innerHTML = "Click to Stop";

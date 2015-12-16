@@ -9,6 +9,9 @@ def tokenize(string):
 def score_sclite(hyp, ref):
     _ref = tokenize(ref)
     _hyp = tokenize(hyp)
+    print (hyp)
+    print ("poo")
+    print ("Hypothesis" + str (_hyp))
 
     with open("ref.ref", 'w') as f:
       f .write(_ref + " (a)\n")
@@ -17,7 +20,7 @@ def score_sclite(hyp, ref):
 
     # platform-dependent shell command
     sclite_windows = ["sclite"]
-    sclite_others = ["./sclite"]
+    sclite_others = ["sclitemac/sclite"]
     cmd_args = ["-i", "spu_id",
                 "-o", "pralign",
                 "-r", "ref.ref",
