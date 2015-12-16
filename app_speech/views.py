@@ -30,9 +30,10 @@ def speech(request):
             else:
                 context['textError'] = "Please type in or upload file with\
  your speech transcript"
-        p = request.user.profile
-        p.transcript = context['uform']
-        p.save()
+        if 'uform' in context.keys():
+            p = request.user.profile
+            p.transcript = context['uform']
+            p.save()
     else:
         uform = TranscriptForm()
         #context = {'uform': uform, 'sform': sform}
