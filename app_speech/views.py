@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from .forms import TranscriptForm, UploadForm, SpeechForm
 from .misc import read_file
 from django.contrib.auth.decorators import login_required
@@ -53,6 +53,8 @@ def results(request):
     hyp = p.speech
     ref = p.transcript
     results = score_sclite(hyp, ref)
+    if not results:
+        return render_to_response('speech/results_none.html')
     p.feedback = results['accuracy']
     p.save()
     return render (request, 'speech/results.html', results)

@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout
 from django.views.decorators.csrf import csrf_protect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 
@@ -23,7 +22,8 @@ def register(request):
             password=form.cleaned_data['password1'],
             email=form.cleaned_data['email']
             )
-            return HttpResponseRedirect('/register/success/')
+            #return HttpResponseRedirect('/register/success/')
+            return redirect('register_success')
     else:
         form = RegistrationForm()
     variables = RequestContext(request, {
@@ -43,7 +43,8 @@ def register_success(request):
 @login_required
 def logout_page(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    #return HttpResponseRedirect('/')
+    return redirect('login_page')
  
 @login_required
 def home(request):
