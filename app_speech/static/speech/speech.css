@@ -5,6 +5,14 @@
 	cursor: pointer;
 }
 
+#tb1 {
+	display: inline-block;
+    border: 0;
+    background-color:transparent;
+    padding: 0;	
+	cursor: pointer;
+}
+
 #sb3{
 	display: inline;
 }
@@ -28,7 +36,7 @@
     padding: 1px;
     text-align: left;
     min-height: 150px;
-	width: 580px;
+	width: 600px;
 	background-color: white;
 }
 

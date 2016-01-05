@@ -8,7 +8,8 @@
 {% endblock %}
 {% block scripts %}
 	<script src="{% static 'speech/jquery-2.1.4.min.js' %}"></script>
-	<script src="{% static 'speech/speech.js' %}"></script>	
+	<script src="{% static 'speech/speech.js' %}"></script>
+    <script src="{% static 'speech/speech_synthesis.js' %}"></script>	
 	<script>
 		var URL = "{% url 'get_speech' %}";		
 	</script>
@@ -30,16 +31,19 @@
 		</div>
 	{% else %}
 		<div class="content_background">
-			<h2 style="line-height:50%;">Transcript</h2>
+			<h2 style="line-height:45%;">Transcript</h2>			
 			If you do not see your transcript, please try to enter it again
+			<br>			
+			<textarea id="transcript" cols='72' rows='9' class="textarea" readonly="readlonly">{{ uform }}</textarea>
 			<br>
-			<textarea id="transcript" cols='70' rows='10' class="textarea" readonly="readlonly">{{ uform }}</textarea>
+			<button id="tb1" onclick="toggleStartStop_synthesis()"><img alt="Start" id="start_img_synthesis" src="{% static 'speech/images/listen.png' %}" width="20" height="20">
+			</button>
 			<br>
 			<a href="{% url 'transcript' %}"><strong>Enter new Transcript</strong></a>
 		</div>
 		<br>
 		<div class="content_background">
-			<h2 style="line-height:50%;">Speech</h2>
+			<h2 style="line-height:45%;">Speech</h2>
 			Now, record with the button below. When ready, click it again to finish.<br>
 			<div id="results" class="textarea">
 				<span class="final" id="final_span"></span> <span class="interim" id=
